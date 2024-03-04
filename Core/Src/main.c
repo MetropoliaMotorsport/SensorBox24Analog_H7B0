@@ -21,7 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "transfer_functions.h"
+#include "functions.h"
+#include "config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,7 +54,7 @@ I2C_HandleTypeDef hi2c4;
 /* USER CODE BEGIN PV */
 
 volatile uint16_t ADC1Data[16];
-volatile uint16_t all_raw_data[16];
+volatile uint16_t all_raw_data[16][ROLLING_AVE];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -677,7 +679,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-	uint8_t ADC1_size = sizeof(ADC1Data)/sizeof(ADC1Data[0]);
 	if(hadc->Instance == ADC1){
 		for(int j = 0; j < hadc->Init.NbrOfConversion -1 ;j++){
 			all_raw_data[j] = ADC1Data[j];
