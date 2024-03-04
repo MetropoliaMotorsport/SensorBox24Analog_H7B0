@@ -21,9 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "transfer_functions.h"
-#include "functions.h"
-#include "config.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,8 +51,12 @@ I2C_HandleTypeDef hi2c4;
 
 /* USER CODE BEGIN PV */
 
-volatile uint16_t ADC1Data[16];
-volatile uint16_t all_raw_data[16][ROLLING_AVE];
+uint16_t ADC1Data[16];
+uint16_t all_raw_data[16][ROLLING_AVE];
+uint32_t averages[16];
+uint8_t AVE_POS = 0;
+
+uint16_t transfer_functions[16];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,6 +71,7 @@ static void MX_ADC1_Init(void);
 static void MX_I2C4_Init(void);
 /* USER CODE BEGIN PFP */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
+void print();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -680,9 +683,29 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 	if(hadc->Instance == ADC1){
-		for(int j = 0; j < hadc->Init.NbrOfConversion -1 ;j++){
-			all_raw_data[j] = ADC1Data[j];
+		if(AVE_POS < ROLLING_AVE){
+			AVE_POS++;
 		}
+		else{
+			AVE_POS = 0;
+			print();
+			for(int i = 0; i < hadc->Init.NbrOfConversion;i++){
+				averages[i] = 0;
+				for(int z = 0; z < ROLLING_AVE;z++){
+					averages[i]+=all_raw_data[i][z];
+				}
+				averages[i] = averages[i] / ROLLING_AVE;
+			}
+		}
+		for(int j = 0; j < hadc->Init.NbrOfConversion;j++){
+			all_raw_data[j][AVE_POS-1] = ADC1Data[j];
+		}
+	}
+}
+
+void print(){
+	for(int i = 0; i < 16; i++){
+		TF_Select(1,averages[i],transfer_functions[i]);
 	}
 }
 /* USER CODE END 4 */

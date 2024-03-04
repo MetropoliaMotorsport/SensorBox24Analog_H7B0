@@ -31,7 +31,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "transfer_functions.h"
+#include "config.h"
+#include "functions.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -59,7 +61,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 
 /* USER CODE BEGIN Private defines */
-
+extern uint32_t averages[16];
+extern uint16_t transfer_functions[16];
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
