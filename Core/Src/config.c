@@ -31,11 +31,11 @@ void Config_1(){
 	transfer_functions[8] = TYRE_TEMP;		//PC2
 	transfer_functions[9] = ANGLE_GEAR;		//PC3
 	transfer_functions[10] = VOLTAGE_3V3;	//PA2
-	transfer_functions[11] = VOLTAGE_3V3;	//PA3
-	transfer_functions[12] = VOLTAGE_3V3;	//PA0
-	transfer_functions[13] = VOLTAGE_3V3;	//PA1
-	transfer_functions[14] = VOLTAGE_3V3;	//PA4
-	transfer_functions[15] = VOLTAGE_3V3;	//PA5
+	transfer_functions[11] = VOLTAGE_5V;	//PA3
+	transfer_functions[12] = VOLTAGE_5V;	//PA0
+	transfer_functions[13] = VOLTAGE_5V;	//PA1
+	transfer_functions[14] = VOLTAGE_5V;	//PA4
+	transfer_functions[15] = VOLTAGE_5V;	//PA5
 
 }
 

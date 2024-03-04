@@ -115,6 +115,8 @@ int main(void)
   MX_I2C4_Init();
   /* USER CODE BEGIN 2 */
   if(HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC1Data, hadc1.Init.NbrOfConversion) != HAL_OK){ Error_Handler(); }
+
+  Config_Setup();
   /* USER CODE END 2 */
 
   /* Infinite loop */

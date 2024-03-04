@@ -48,6 +48,7 @@ uint32_t TF_Select(uint8_t bytes, uint32_t raw, uint8_t sensor){
 		break;
 	default:
 		//TODO implement error here
+		break;
 	}
 
 	return transmit;
