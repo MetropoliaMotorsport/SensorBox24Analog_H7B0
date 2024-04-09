@@ -8,6 +8,8 @@
 #ifndef INC_FUNCTIONS_H_
 #define INC_FUNCTIONS_H_
 
-
+void CanSend(uint8_t *TxData);
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
+void print(uint16_t select);
 
 #endif /* INC_FUNCTIONS_H_ */

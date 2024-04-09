@@ -12,9 +12,6 @@
 #include "main.h"
 #include "transfer_functions.h"
 
-#define ID 1
-
-#define ROLLING_AVE 64
 
 void Config_Setup(void);
 void Config_1();

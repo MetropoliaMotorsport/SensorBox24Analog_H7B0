@@ -55,14 +55,26 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+#define ROLLING_AVE 32
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
 
 /* USER CODE BEGIN Private defines */
+extern FDCAN_TxHeaderTypeDef TxHeader;
+extern FDCAN_RxHeaderTypeDef RxHeader;
+
+extern FDCAN_HandleTypeDef hfdcan1;
+
+
 extern uint32_t averages[16];
 extern uint16_t transfer_functions[16];
+extern uint16_t all_raw_data[16][ROLLING_AVE];
+extern uint16_t ADC1Data[16];
+extern uint8_t AVE_POS;
+extern uint16_t CAN_interval;
+extern uint16_t CAN_ID[16];
+extern uint16_t millis;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
