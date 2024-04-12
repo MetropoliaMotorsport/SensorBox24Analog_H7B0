@@ -11,5 +11,6 @@
 void CanSend(uint8_t *TxData);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void print(uint16_t select);
+void decode();
 
 #endif /* INC_FUNCTIONS_H_ */

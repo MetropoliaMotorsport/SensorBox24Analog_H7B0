@@ -31,7 +31,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 			/* Reception Error */
 			Error_Handler();
 		}else{
-			//decode();
+			decode();
 		}
 
 		if (HAL_FDCAN_ActivateNotification(hfdcan, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0) != HAL_OK)
@@ -51,4 +51,20 @@ void print(uint16_t select){
 		TxHeader.Identifier = CAN_ID[select];
 
 		CanSend(TxData);
+}
+
+void decode(){
+	switch(TxData[0]){
+	case 1: 				//change sensor type, aka transfer function
+		uint8_t select_type = TxData[1];
+		transfer_functions[select_type] = TxData[2];
+		break;
+	case 2:					//change CAN_interval in ms, so how often we want it to be sent
+		uint8_t divider = TxData[1];
+		CAN_interval = 1000 / divider;
+		break;
+	case 3:					//change CAN_id for sensor (most probably not to be used but in case let's have it)
+		uint8_t select_id = TxData[1];
+		CAN_ID[select_id] = TxData[2];
+	}
 }

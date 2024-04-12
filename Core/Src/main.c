@@ -63,6 +63,8 @@ uint16_t init_can_id = 1;
 uint16_t CAN_ID[16];
 uint16_t millis;
 
+uint8_t CAN_enable = 0;
+
 uint16_t transfer_functions[16];
 
 FDCAN_TxHeaderTypeDef TxHeader;
@@ -114,7 +116,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  Config_Setup();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -129,18 +131,29 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim3);
   if(HAL_ADC_Start_DMA(&hadc1, (uint32_t *)ADC1Data, hadc1.Init.NbrOfConversion) != HAL_OK){ Error_Handler(); }
   if(HAL_FDCAN_Start(&hfdcan1)!= HAL_OK){ Error_Handler(); }
   if(HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE,0) != HAL_OK) { Error_Handler(); }
 
-  Config_Setup();
+
+  uint8_t counter = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  if(CAN_enable == 1){
+		  if(millis % CAN_interval == 0){
+			  print(counter);
+			  counter++;
+			  if(counter == 16){
+				  counter = 0;
+			  }
+		  }
+		  TxHeader.Identifier = 17;
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -461,10 +474,10 @@ static void MX_FDCAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN FDCAN1_Init 2 */
-  TxHeader.Identifier = 0;
+  TxHeader.Identifier = CAN_ID[0];
   TxHeader.IdType = FDCAN_STANDARD_ID;
   TxHeader.TxFrameType = FDCAN_DATA_FRAME;
-  TxHeader.DataLength = 3;
+  TxHeader.DataLength = 2;
   TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
   TxHeader.BitRateSwitch = FDCAN_BRS_OFF;
   TxHeader.FDFormat = FDCAN_CLASSIC_CAN;
@@ -822,7 +835,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 						averages[i]=(averages[i] + all_raw_data[i][z])/2;
 					}
 				}
-				print(i);
 			}
 		}
 		for(int j = 0; j < hadc->Init.NbrOfConversion;j++){

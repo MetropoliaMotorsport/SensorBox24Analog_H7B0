@@ -66,7 +66,6 @@ extern FDCAN_RxHeaderTypeDef RxHeader;
 
 extern FDCAN_HandleTypeDef hfdcan1;
 
-
 extern uint32_t averages[16];
 extern uint16_t transfer_functions[16];
 extern uint16_t all_raw_data[16][ROLLING_AVE];
@@ -75,6 +74,7 @@ extern uint8_t AVE_POS;
 extern uint16_t CAN_interval;
 extern uint16_t CAN_ID[16];
 extern uint16_t millis;
+extern uint8_t CAN_enable;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
