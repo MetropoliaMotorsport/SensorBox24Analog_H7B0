@@ -22,6 +22,9 @@ uint16_t TF_Select(uint8_t bytes, uint32_t raw, uint8_t sensor){
 	case VOLTAGE_5V:
 		transmit = TF_5V(bytes, raw);
 		break;
+	case VOLTAGE_24V:
+		transmit = TF_24V(bytes,raw);
+		break;
 	case BPPS:
 		transmit = TF_BPPS(bytes, raw);
 		break;
@@ -72,6 +75,13 @@ uint16_t TF_5V(uint8_t bytes, uint32_t raw){
 	uint16_t voltage = raw*max_volt / 4095;
 	return voltage;
 
+}
+
+uint16_t TF_24V(uint8_t bytes, uint32_t raw){
+	uint16_t max_volt = 24000;
+
+	uint16_t voltage = raw*max_volt / 4095;
+	return voltage;
 }
 uint16_t TF_BPPS(uint8_t bytes, uint32_t raw){ //brake pedal position sensor
 	uint16_t max_brake_pres = 200;

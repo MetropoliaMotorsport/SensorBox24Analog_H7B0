@@ -13,16 +13,17 @@
 
 #define VOLTAGE_3V3		0
 #define VOLTAGE_5V		1
-#define BPPS			2
-#define APPS			3
-#define	FRONT_HEAVE		4
-#define	FRONT_ROLL		5
-#define	REAR_HEAVE		6
-#define REAR_ROLL		7
-#define	TYRE_TEMP		8
-#define ANGLE_GEAR		9
-#define	WATER_LVL		10
-#define BRK_PRES		11
+#define VOLTAGE_24V		2
+#define BPPS			3
+#define APPS			4
+#define	FRONT_HEAVE		5
+#define	FRONT_ROLL		6
+#define	REAR_HEAVE		7
+#define REAR_ROLL		8
+#define	TYRE_TEMP		9
+#define ANGLE_GEAR		10
+#define	WATER_LVL		11
+#define BRK_PRES		12
 
 #endif /* INC_TRANSFER_FUNCTIONS_H_ */
 
@@ -30,6 +31,7 @@ uint16_t TF_Select(uint8_t bytes,uint32_t raw, uint8_t sensor);
 
 uint16_t TF_3V3(uint8_t bytes, uint32_t raw);
 uint16_t TF_5V(uint8_t bytes, uint32_t raw);
+uint16_t TF_24V(uint8_t bytes, uint32_t raw);
 uint16_t TF_BPPS(uint8_t bytes, uint32_t raw);
 uint16_t TF_APPS(uint8_t bytes, uint32_t raw);
 uint16_t TF_FRONT_HEAVE(uint8_t bytes, uint32_t raw);

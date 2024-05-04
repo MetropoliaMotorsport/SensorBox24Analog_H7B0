@@ -69,6 +69,7 @@ extern FDCAN_TxHeaderTypeDef TxHeader;
 extern FDCAN_RxHeaderTypeDef RxHeader;
 
 extern FDCAN_HandleTypeDef hfdcan1;
+extern FDCAN_HandleTypeDef hfdcan2;
 
 extern uint32_t averages[16];
 extern uint16_t transfer_functions[16];
