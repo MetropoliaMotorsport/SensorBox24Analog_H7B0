@@ -59,10 +59,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED1_Pin GPIO_PIN_9
-#define LED1_GPIO_Port GPIOA
-#define LED2_Pin GPIO_PIN_10
-#define LED2_GPIO_Port GPIOA
+#define LED1_Pin GPIO_PIN_15
+#define LED1_GPIO_Port GPIOB
+#define LED2_Pin GPIO_PIN_6
+#define LED2_GPIO_Port GPIOC
 
 /* USER CODE BEGIN Private defines */
 extern FDCAN_TxHeaderTypeDef TxHeader;

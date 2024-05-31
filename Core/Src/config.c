@@ -22,7 +22,7 @@ void Config_Setup(void){
 
 void Config_1(){
 
-	CAN_interval = 50;
+	CAN_interval = 100;
 
 	transfer_functions[0] = VOLTAGE_3V3;		// PA6
 	transfer_functions[1] = VOLTAGE_3V3;	// PC4
