@@ -73,7 +73,6 @@ FDCAN_RxHeaderTypeDef RxHeader;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void PeriphCommonClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_FDCAN1_Init(void);
@@ -113,9 +112,6 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-
-/* Configure the peripherals common clocks */
-  PeriphCommonClock_Config();
 
   /* USER CODE BEGIN SysInit */
   Config_Setup();
@@ -222,33 +218,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief Peripherals Common Clock Configuration
-  * @retval None
-  */
-void PeriphCommonClock_Config(void)
-{
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-
-  /** Initializes the peripherals clock
-  */
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_ADC|RCC_PERIPHCLK_FDCAN;
-  PeriphClkInitStruct.PLL2.PLL2M = 2;
-  PeriphClkInitStruct.PLL2.PLL2N = 32;
-  PeriphClkInitStruct.PLL2.PLL2P = 8;
-  PeriphClkInitStruct.PLL2.PLL2Q = 25;
-  PeriphClkInitStruct.PLL2.PLL2R = 2;
-  PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
-  PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOWIDE;
-  PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
-  PeriphClkInitStruct.FdcanClockSelection = RCC_FDCANCLKSOURCE_PLL2;
-  PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
-
-/**
   * @brief ADC1 Initialization Function
   * @param None
   * @retval None
@@ -301,7 +270,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_3;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_387CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_810CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -474,7 +443,7 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.ProtocolException = DISABLE;
   hfdcan1.Init.NominalPrescaler = 1;
   hfdcan1.Init.NominalSyncJumpWidth = 1;
-  hfdcan1.Init.NominalTimeSeg1 = 13;
+  hfdcan1.Init.NominalTimeSeg1 = 22;
   hfdcan1.Init.NominalTimeSeg2 = 2;
   hfdcan1.Init.DataPrescaler = 1;
   hfdcan1.Init.DataSyncJumpWidth = 1;
@@ -536,7 +505,7 @@ static void MX_FDCAN2_Init(void)
   hfdcan2.Init.ProtocolException = DISABLE;
   hfdcan2.Init.NominalPrescaler = 1;
   hfdcan2.Init.NominalSyncJumpWidth = 1;
-  hfdcan2.Init.NominalTimeSeg1 = 13;
+  hfdcan2.Init.NominalTimeSeg1 = 22;
   hfdcan2.Init.NominalTimeSeg2 = 2;
   hfdcan2.Init.DataPrescaler = 1;
   hfdcan2.Init.DataSyncJumpWidth = 1;

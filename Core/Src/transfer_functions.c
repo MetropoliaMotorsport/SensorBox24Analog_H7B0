@@ -70,19 +70,17 @@ uint16_t TF_3V3(uint8_t bytes, uint32_t raw){
 }
 
 uint16_t TF_5V(uint8_t bytes, uint32_t raw){
-	//uint16_t max_volt = 5000;
+	uint16_t max_volt = 5000;
 
-	//uint16_t voltage = raw*max_volt / 4095;
-	uint16_t voltage = raw;
+	uint16_t voltage = raw*max_volt / 4095;
 	return voltage;
 
 }
 
 uint16_t TF_24V(uint8_t bytes, uint32_t raw){
-	//uint16_t max_volt = 24000;
+	uint16_t max_volt = 24000;
 
-	//uint16_t voltage = raw*max_volt / 4095;
-	uint16_t voltage = raw;
+	uint16_t voltage = raw*max_volt / 4095;
 	return voltage;
 }
 uint16_t TF_BPPS(uint8_t bytes, uint32_t raw){ //brake pedal position sensor

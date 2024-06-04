@@ -24,22 +24,22 @@ void Config_1(){
 
 	CAN_interval = 100;
 
-	transfer_functions[0] = VOLTAGE_3V3;		// PA6
+	transfer_functions[0] = VOLTAGE_24V;		// PA6
 	transfer_functions[1] = VOLTAGE_3V3;	// PC4
-	transfer_functions[2] = VOLTAGE_24V;		//PB1
-	transfer_functions[3] = VOLTAGE_3V3;		//PA7
-	transfer_functions[4] = VOLTAGE_24V;		//PC5
-	transfer_functions[5] = VOLTAGE_24V;			//PB0
-	transfer_functions[6] = VOLTAGE_3V3;			//PC0
-	transfer_functions[7] = VOLTAGE_3V3;			//PC1
+	transfer_functions[2] = VOLTAGE_3V3;		//PB1
+	transfer_functions[3] = VOLTAGE_24V;		//PA7
+	transfer_functions[4] = VOLTAGE_24V;		//PC5 NC
+	transfer_functions[5] = VOLTAGE_24V;			//PB0 NC
+	transfer_functions[6] = VOLTAGE_24V;			//PC0
+	transfer_functions[7] = VOLTAGE_5V;			//PC1
 	transfer_functions[8] = VOLTAGE_5V;		//PC2
 	transfer_functions[9] = VOLTAGE_5V;		//PC3
 	transfer_functions[10] = VOLTAGE_5V;	//PA2
 	transfer_functions[11] = VOLTAGE_5V;	//PA3
 	transfer_functions[12] = VOLTAGE_5V;	//PA0
 	transfer_functions[13] = VOLTAGE_5V;	//PA1
-	transfer_functions[14] = VOLTAGE_5V;	//PA4
-	transfer_functions[15] = VOLTAGE_3V3;	//PA5
+	transfer_functions[14] = VOLTAGE_5V;	//PA4 NC
+	transfer_functions[15] = VOLTAGE_3V3;	//PA5 NC
 
 	CAN_ID[0] = 1;
 	CAN_ID[1] = 2;
