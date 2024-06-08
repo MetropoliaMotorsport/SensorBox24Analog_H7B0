@@ -56,8 +56,8 @@ void print(uint16_t select){
 void decode(){
 	switch(TxData[0]){
 	case 1: 				//change sensor type, aka transfer function
-		uint8_t select_type = TxData[1];
-		transfer_functions[select_type] = TxData[2];
+		uint8_t select_id = TxData[1];
+		transfer_functions[select_id] = TxData[2];
 		break;
 	case 2:					//change CAN_interval in ms, so how often we want it to be sent
 		uint8_t divider = TxData[1];
