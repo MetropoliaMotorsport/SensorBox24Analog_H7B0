@@ -1,4 +1,4 @@
 ../Core/Src/functions.c:18:6:CanSend	16	static
 ../Core/Src/functions.c:24:6:HAL_FDCAN_RxFifo0Callback	16	static
 ../Core/Src/functions.c:47:6:print	24	static
-../Core/Src/functions.c:56:6:decode	16	static
+../Core/Src/functions.c:58:6:decode	16	static

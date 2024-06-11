@@ -270,7 +270,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_3;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_810CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_32CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -798,17 +798,21 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 		else{
 			AVE_POS = 0;
 			for(int i = 0; i < hadc->Init.NbrOfConversion;i++){
-				for(int z = 0; z < ROLLING_AVE;z++){
-					if(z == 0){
-						averages[i] = all_raw_data[i][0];
-					}else{
-						averages[i]=(averages[i] + all_raw_data[i][z])/2;
+				if(transfer_functions[i] != NC){
+					for(int z = 0; z < ROLLING_AVE;z++){
+						if(z == 0){
+							averages[i] = all_raw_data[i][0];
+						}else{
+							averages[i]=(averages[i] + all_raw_data[i][z])/2;
+						}
 					}
 				}
 			}
 		}
 		for(int j = 0; j < hadc->Init.NbrOfConversion;j++){
-			all_raw_data[j][AVE_POS-1] = ADC1Data[j];
+			if(transfer_functions[j] != NC){
+				all_raw_data[j][AVE_POS-1] = ADC1Data[j];
+			}
 		}
 	}
 }

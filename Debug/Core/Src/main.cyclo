@@ -9,5 +9,5 @@
 ../Core/Src/main.c:695:13:MX_TIM3_Init	4
 ../Core/Src/main.c:738:13:MX_DMA_Init	1
 ../Core/Src/main.c:756:13:MX_GPIO_Init	1
-../Core/Src/main.c:793:6:HAL_ADC_ConvCpltCallback	7
-../Core/Src/main.c:821:6:Error_Handler	1
+../Core/Src/main.c:793:6:HAL_ADC_ConvCpltCallback	9
+../Core/Src/main.c:825:6:Error_Handler	1

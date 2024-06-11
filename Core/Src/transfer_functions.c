@@ -64,61 +64,97 @@ uint16_t TF_Select(uint8_t bytes, uint32_t raw, uint8_t sensor){
 
 uint16_t TF_3V3(uint8_t bytes, uint32_t raw){
 	uint16_t max_volt = 3300;
+	uint16_t min_volt = 52;
 
-	uint16_t voltage = raw*max_volt / 4095;
+	uint16_t voltage = (raw*max_volt / 4095)-min_volt;
+
 	return voltage;
 }
 
 uint16_t TF_5V(uint8_t bytes, uint32_t raw){
 	uint16_t max_volt = 5000;
+	uint16_t min_volt = 78;
 
-	uint16_t voltage = raw*max_volt / 4095;
+	uint16_t voltage = raw*max_volt / 4095 -min_volt;
 	return voltage;
 
 }
 
 uint16_t TF_24V(uint8_t bytes, uint32_t raw){
 	uint16_t max_volt = 24000;
+	uint16_t min_volt = 375;
 
-	uint16_t voltage = raw*max_volt / 4095;
+	uint16_t voltage = raw*max_volt / 4095 -min_volt;
 	return voltage;
 }
+
 uint16_t TF_BPPS(uint8_t bytes, uint32_t raw){ //brake pedal position sensor
-	uint16_t max_brake_pres = 200;
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
 
-	uint16_t brake_pres = raw*max_brake_pres / 4095;
-	return brake_pres;
-
+	uint16_t bpps = raw*max_pos / (4095-min_pos_raw);
+	return bpps;
 }
+
 uint16_t TF_APPS(uint8_t bytes, uint32_t raw){
-	uint16_t max_pos = 100; //in percent
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
 
-	uint16_t apps = raw*max_pos / 4095;
+	uint16_t apps = raw*max_pos / (4095-min_pos_raw);
 	return apps;
-
 }
+
 uint16_t TF_FRONT_HEAVE(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
+
+	uint16_t front_heave = raw*max_pos / (4095-min_pos_raw);
+	return front_heave;
 
 }
 uint16_t TF_REAR_HEAVE(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
 
+	uint16_t rear_heave = raw*max_pos / (4095-min_pos_raw);
+	return rear_heave;
 }
 uint16_t TF_FRONT_ROLL(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
 
+	uint16_t front_roll = raw*max_pos / (4095-min_pos_raw);
+	return front_roll;
 }
 uint16_t TF_REAR_ROLL(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 10000; //in percent 100.00%
+	uint16_t min_pos_raw = 0;
 
+	uint16_t rear_roll = raw*max_pos / (4095-min_pos_raw);
+	return rear_roll;
 }
 uint16_t TF_TYRE_TEMP(uint8_t bytes, uint32_t raw){
 
 }
 uint16_t TF_ANGLE_GEAR(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 36000; //in degrees 360.00
+	uint16_t min_pos_raw = 0;
 
+	uint16_t angle_gear_sensor = raw*max_pos / (4095-min_pos_raw);
+	return angle_gear_sensor;
 }
 uint16_t TF_WATER_LVL(uint8_t bytes, uint32_t raw){
 
 }
 
 uint16_t TF_BRK_PRES(uint8_t bytes, uint32_t raw){
+	uint16_t max_brake_pres = 200;
+	uint16_t min_raw = 0;
 
+	uint16_t brake_pres = raw*max_brake_pres / (4095-min_raw);
+	return brake_pres;
+}
+
+uint16_t TF_NC(uint8_t bytes, uint32_t raw){
+	return 0;
 }

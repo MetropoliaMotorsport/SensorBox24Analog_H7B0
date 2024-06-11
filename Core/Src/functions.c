@@ -45,12 +45,14 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 
 
 void print(uint16_t select){
+	if(transfer_functions[select] != NC){
 		uint16_t Data = TF_Select(1,averages[select],transfer_functions[select]);
 		TxData[0] = Data;
 		TxData[1] = Data >> 8;
 		TxHeader.Identifier = CAN_ID[select];
 
 		CanSend(TxData);
+	}
 }
 
 void decode(){
@@ -64,7 +66,8 @@ void decode(){
 		CAN_interval = 1000 / divider;
 		break;
 	case 3:					//change CAN_id for sensor (most probably not to be used but in case let's have it)
-		uint8_t select_id = TxData[1];
-		CAN_ID[select_id] = TxData[2];
+		uint8_t new_can_id = TxData[1];
+		CAN_ID[new_can_id] = TxData[2];
+		break;
 	}
 }

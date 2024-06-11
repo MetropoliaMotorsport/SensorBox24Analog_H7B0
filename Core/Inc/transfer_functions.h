@@ -24,6 +24,7 @@
 #define ANGLE_GEAR		10
 #define	WATER_LVL		11
 #define BRK_PRES		12
+#define NC				13
 
 #endif /* INC_TRANSFER_FUNCTIONS_H_ */
 
@@ -42,3 +43,4 @@ uint16_t TF_TYRE_TEMP(uint8_t bytes, uint32_t raw);
 uint16_t TF_ANGLE_GEAR(uint8_t bytes, uint32_t raw);
 uint16_t TF_WATER_LVL(uint8_t bytes, uint32_t raw);
 uint16_t TF_BRK_PRES(uint8_t bytes, uint32_t raw);
+uint16_t TF_NC(uint8_t bytes, uint32_t raw);
