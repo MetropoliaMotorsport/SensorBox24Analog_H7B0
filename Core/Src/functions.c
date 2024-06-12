@@ -46,9 +46,9 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 
 void print(uint16_t select){
 		//uint16_t Data = TF_Select(1,averages[select],transfer_functions[select]);
-		uint16_t Data = sensors[select].transfer_function(1,sensors[select].averages);
-		TxData[0] = Data;
-		TxData[1] = Data >> 8;
+		sensors[select].data = sensors[select].transfer_function(1,sensors[select].averages);
+		TxData[0] = sensors[select].data;
+		TxData[1] = sensors[select].data >> 8;
 		TxHeader.Identifier = sensors[select].CAN_ID;
 
 		if(sensors[select].CAN_ID)

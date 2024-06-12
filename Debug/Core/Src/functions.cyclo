@@ -1,4 +1,4 @@
 ../Core/Src/functions.c:18:6:CanSend	3
 ../Core/Src/functions.c:24:6:HAL_FDCAN_RxFifo0Callback	4
-../Core/Src/functions.c:47:6:print	1
-../Core/Src/functions.c:57:6:decode	1
+../Core/Src/functions.c:47:6:print	2
+../Core/Src/functions.c:58:6:decode	1

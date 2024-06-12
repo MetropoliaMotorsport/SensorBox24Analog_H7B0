@@ -18,6 +18,7 @@ typedef struct {
     uint16_t CAN_interval;
     uint32_t averages;
     uint8_t pin;
+    uint16_t data;
 } Sensor;
 
 // Ensure external visibility of the variables
