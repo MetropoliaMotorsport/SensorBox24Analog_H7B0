@@ -51,7 +51,8 @@ void print(uint16_t select){
 		TxData[1] = Data >> 8;
 		TxHeader.Identifier = sensors[select].CAN_ID;
 
-		CanSend(TxData);
+		if(sensors[select].CAN_ID)
+			CanSend(TxData);
 }
 
 void decode(){
