@@ -1,62 +1,47 @@
-/*
- * config.c
- *
- *  Created on: Mar 4, 2024
- *      Author: csort
- */
-
 #include "config.h"
 
 #define ID 1
 
-void Config_Setup(void){
 
+void Config_Setup(void) {
 #if ID == 1
-	Config_1();
+    Config_1();
 #elif ID == 2
-	Config_2();
+    Config_2();
 #elif ID == 3
-	Config_3();
+    Config_3();
 #endif
 }
 
-void Config_1(){
+void Config_1(void) {
 
-	CAN_interval = 100;
+	//initialize the sensors
+	for (int i = 0; i < 16; i++) {
+		sensors[i].transfer_function = TF_3V3;
+		sensors[i].CAN_ID = 0;
+		sensors[i].CAN_interval = 100;
+		sensors[i].averages = 0;
+		sensors[i].pin = i;
+	}
 
-	transfer_functions[0] = VOLTAGE_24V;		// PA6
-	transfer_functions[1] = VOLTAGE_3V3;	// PC4
-	transfer_functions[2] = VOLTAGE_3V3;		//PB1
-	transfer_functions[3] = VOLTAGE_24V;		//PA7
-	transfer_functions[4] = VOLTAGE_24V;		//PC5 NC
-	transfer_functions[5] = VOLTAGE_24V;			//PB0 NC
-	transfer_functions[6] = VOLTAGE_24V;			//PC0
-	transfer_functions[7] = VOLTAGE_5V;			//PC1
-	transfer_functions[8] = VOLTAGE_5V;		//PC2
-	transfer_functions[9] = VOLTAGE_5V;		//PC3
-	transfer_functions[10] = VOLTAGE_5V;	//PA2
-	transfer_functions[11] = VOLTAGE_5V;	//PA3
-	transfer_functions[12] = VOLTAGE_5V;	//PA0
-	transfer_functions[13] = VOLTAGE_5V;	//PA1
-	transfer_functions[14] = VOLTAGE_5V;	//PA4 NC
-	transfer_functions[15] = VOLTAGE_3V3;	//PA5 NC
+	// Sensor definitions
+	Sensor APPS1 = {TF_APPS, 0x21, 100, 0, V24_in1};
+	Sensor APPS2 = {TF_APPS, 0x22, 100, 0, V5_in0};
+	Sensor BPPS = {TF_BPPS, 0x23, 100, 0, V5_in2};
+	Sensor ANGLE_GEAR = {TF_ANGLE_GEAR, 0x24, 100, 0, V24_in0};
+	Sensor BTN1 = {TF_BTN, 0x25, 100, 0, V5_in3};
+	Sensor BTN2 = {TF_BTN, 0x26, 100, 0, V5_in4};
+	Sensor BTN3 = {TF_BTN, 0x27, 100, 0, V5_in5};
 
-	CAN_ID[0] = 1;
-	CAN_ID[1] = 2;
-	CAN_ID[2] = 3;
-	CAN_ID[3] = 4;
-	CAN_ID[4] = 5;
-	CAN_ID[5] = 6;
-	CAN_ID[6] = 7;
-	CAN_ID[7] = 8;
-	CAN_ID[8] = 9;
-	CAN_ID[9] = 10;
-	CAN_ID[10] = 11;
-	CAN_ID[11] = 12;
-	CAN_ID[12] = 13;
-	CAN_ID[13] = 14;
-	CAN_ID[14] = 15;
-	CAN_ID[15] = 16;
+    sensors[APPS1.pin] = APPS1;
+    sensors[APPS2.pin] = APPS2;
+    sensors[BPPS.pin] = BPPS;
+    sensors[ANGLE_GEAR.pin] = ANGLE_GEAR;
+	sensors[BTN1.pin] = BTN1;
+	sensors[BTN2.pin] = BTN2;
+	sensors[BTN3.pin] = BTN3;
 
+	
+
+    CAN_interval = 100;
 }
-

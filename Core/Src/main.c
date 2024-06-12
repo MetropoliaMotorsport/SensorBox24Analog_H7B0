@@ -22,7 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-
+#include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,19 +53,17 @@ I2C_HandleTypeDef hi2c4;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
+Sensor sensors[16];
 
 uint16_t ADC1Data[16];
 uint16_t all_raw_data[16][ROLLING_AVE];
-uint32_t averages[16];
+
 uint8_t AVE_POS = 0;
 uint16_t CAN_interval = 0;
 uint16_t init_can_id = 1;
 uint16_t CAN_ID[16];
 uint16_t millis;
-
 uint8_t CAN_enable = 0;
-
-uint16_t transfer_functions[16];
 
 FDCAN_TxHeaderTypeDef TxHeader;
 FDCAN_RxHeaderTypeDef RxHeader;
@@ -800,9 +799,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 			for(int i = 0; i < hadc->Init.NbrOfConversion;i++){
 				for(int z = 0; z < ROLLING_AVE;z++){
 					if(z == 0){
-						averages[i] = all_raw_data[i][0];
+						//averages[i] = all_raw_data[i][0];
+            sensors[i].averages = all_raw_data[i][0];
 					}else{
-						averages[i]=(averages[i] + all_raw_data[i][z])/2;
+						//averages[i]=(averages[i] + all_raw_data[i][z])/2;
+            sensors[i].averages = (sensors[i].averages + all_raw_data[i][z])/2;
 					}
 				}
 			}

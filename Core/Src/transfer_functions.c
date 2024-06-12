@@ -8,59 +8,7 @@
 #include "transfer_functions.h"
 #include "functions.h"
 #include "main.h"
-
-
-
-uint16_t TF_Select(uint8_t bytes, uint32_t raw, uint8_t sensor){
-
-	uint16_t transmit = 0;
-
-	switch(sensor){
-	case VOLTAGE_3V3:
-		transmit = TF_3V3(bytes, raw);
-		break;
-	case VOLTAGE_5V:
-		transmit = TF_5V(bytes, raw);
-		break;
-	case VOLTAGE_24V:
-		transmit = TF_24V(bytes,raw);
-		break;
-	case BPPS:
-		transmit = TF_BPPS(bytes, raw);
-		break;
-	case APPS:
-		transmit = TF_APPS(bytes, raw);
-		break;
-	case FRONT_HEAVE:
-		transmit = TF_FRONT_HEAVE(bytes, raw);
-		break;
-	case REAR_HEAVE:
-		transmit = TF_REAR_HEAVE(bytes, raw);
-		break;
-	case FRONT_ROLL:
-		transmit = TF_FRONT_ROLL(bytes, raw);
-		break;
-	case REAR_ROLL:
-		transmit = TF_REAR_ROLL(bytes, raw);
-		break;
-	case TYRE_TEMP:
-		transmit = TF_TYRE_TEMP(bytes, raw);
-		break;
-	case ANGLE_GEAR:
-		transmit = TF_ANGLE_GEAR(bytes, raw);
-		break;
-	case WATER_LVL:
-		transmit = TF_WATER_LVL(bytes, raw);
-		break;
-	case BRK_PRES:
-		transmit = TF_BRK_PRES(bytes, raw);
-	default:
-		//TODO implement error here
-		break;
-	}
-
-	return transmit;
-}
+#include "config.h"
 
 uint16_t TF_3V3(uint8_t bytes, uint32_t raw){
 	uint16_t max_volt = 3300;
@@ -97,6 +45,11 @@ uint16_t TF_APPS(uint8_t bytes, uint32_t raw){
 	return apps;
 
 }
+
+uint16_t TF_BTN(uint8_t bytes, uint32_t raw){
+
+}
+
 uint16_t TF_FRONT_HEAVE(uint8_t bytes, uint32_t raw){
 
 }
