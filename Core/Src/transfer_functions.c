@@ -47,7 +47,14 @@ uint16_t TF_APPS(uint8_t bytes, uint32_t raw){
 }
 
 uint16_t TF_BTN(uint8_t bytes, uint32_t raw){
+		uint16_t max_volt = 5000;
 
+		uint16_t voltage = raw*max_volt / 4095;
+
+		if(voltage < 3000)
+			return 0;
+		else
+			return 1;
 }
 
 uint16_t TF_FRONT_HEAVE(uint8_t bytes, uint32_t raw){
