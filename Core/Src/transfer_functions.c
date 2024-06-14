@@ -32,18 +32,39 @@ uint16_t TF_24V(uint8_t bytes, uint32_t raw){
 	return voltage;
 }
 uint16_t TF_BPPS(uint8_t bytes, uint32_t raw){ //brake pedal position sensor
-	uint16_t max_brake_pres = 200;
+	uint16_t max_pos = 100; //in percent
+	uint16_t min_raw = 1538;
+	uint16_t max_raw = 3880;
 
-	uint16_t brake_pres = raw*max_brake_pres / 4095;
-	return brake_pres;
+	if(raw > min_raw){
+		uint16_t bpps = (raw-min_raw)*max_pos / (max_raw-min_raw);
+		return bpps;
+	}
+	return 0;
 
 }
-uint16_t TF_APPS(uint8_t bytes, uint32_t raw){
+uint16_t TF_APPS1(uint8_t bytes, uint32_t raw){
 	uint16_t max_pos = 100; //in percent
+	uint16_t min_raw = 650;
+	uint16_t max_raw = 1990;
 
-	uint16_t apps = raw*max_pos / 4095;
-	return apps;
+	if(raw > min_raw){
+		uint16_t apps = (raw-min_raw)*max_pos / (max_raw-min_raw);
+		return apps;
+	}
+	return 0;
+}
 
+uint16_t TF_APPS2(uint8_t bytes, uint32_t raw){
+	uint16_t max_pos = 100; //in percent
+	uint16_t min_raw = 690;
+	uint16_t max_raw = 2130;
+
+	if(raw > min_raw){
+		uint16_t apps = (raw-min_raw)*max_pos / (max_raw-min_raw);
+		return apps;
+	}
+	return 0;
 }
 
 uint16_t TF_BTN(uint8_t bytes, uint32_t raw){
