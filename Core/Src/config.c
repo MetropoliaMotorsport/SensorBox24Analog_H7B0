@@ -19,7 +19,7 @@ void Config_1(void) {
 	for (int i = 0; i < 16; i++) {
 		sensors[i].transfer_function = TF_3V3;
 		sensors[i].CAN_ID = 0;
-		sensors[i].CAN_interval = 100;
+		sensors[i].CAN_interval = 20;
 		sensors[i].averages = 0;
 		sensors[i].pin = i;
 	}
