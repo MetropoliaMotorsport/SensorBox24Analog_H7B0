@@ -67,6 +67,8 @@ uint8_t CAN_enable = 0;
 
 FDCAN_TxHeaderTypeDef TxHeader;
 FDCAN_RxHeaderTypeDef RxHeader;
+CAN_Message RxMessage;
+CAN_Message TxMessage;
 
 /* USER CODE END PV */
 
@@ -467,7 +469,7 @@ static void MX_FDCAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN FDCAN1_Init 2 */
-  TxHeader.Identifier = CAN_ID[0];
+  TxHeader.Identifier = 0;
   TxHeader.IdType = FDCAN_STANDARD_ID;
   TxHeader.TxFrameType = FDCAN_DATA_FRAME;
   TxHeader.DataLength = 2;
@@ -529,7 +531,7 @@ static void MX_FDCAN2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN FDCAN2_Init 2 */
-  TxHeader.Identifier = CAN_ID[0];
+  TxHeader.Identifier = 0;
   TxHeader.IdType = FDCAN_STANDARD_ID;
   TxHeader.TxFrameType = FDCAN_DATA_FRAME;
   TxHeader.DataLength = 2;
