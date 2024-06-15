@@ -41,7 +41,7 @@ void Config_1(void) {
 
 	
 
-    CAN_interval = 100;
+    CAN_interval = 20;
 }
 
 void Config_2(void){
