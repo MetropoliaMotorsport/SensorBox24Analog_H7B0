@@ -65,6 +65,9 @@ uint16_t CAN_ID[16];
 uint16_t millis;
 uint8_t CAN_enable = 0;
 
+uint8_t CAL_counter;
+uint8_t CAL_ON;
+
 FDCAN_TxHeaderTypeDef TxHeader;
 FDCAN_RxHeaderTypeDef RxHeader;
 CAN_Message RxMessage;

@@ -19,6 +19,10 @@ typedef struct {
     uint32_t averages;
     uint8_t pin;
     uint16_t data;
+    uint8_t cal_done;
+    uint16_t cal_0;
+    uint16_t cal_1;
+    uint16_t cal_2;
 } Sensor;
 
 // Ensure external visibility of the variables

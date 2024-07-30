@@ -27,6 +27,9 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 			/* Reception Error */
 			Error_Handler();
 		}else{
+			if(RxHeader.Identifier == 31){
+				calibrate();
+			}
 			decode();
 		}
 
@@ -52,7 +55,60 @@ void print(uint16_t select){
 }
 
 void decode(){
-	switch(RxMessage.Bytes[0]){
-	
+
+}
+
+void calibrate(){
+	uint8_t max = 0;
+	uint8_t min = 0;
+	if(RxMessage.Bytes[1] != 1){
+		min = calibration(RxMessage.Bytes[0]);
+
+	}else{
+		max = calibration(RxMessage.Bytes[0]);
+	}
+
+	TxMessage.Bytes[0] = RxMessage.Bytes[0];
+	TxMessage.Bytes[1] = RxMessage.Bytes[1];
+	TxHeader.Identifier = 32;
+	CanSend(TxMessage.Bytes);
+
+
+	TxMessage.Bytes[0] = RxMessage.Bytes[1];
+	TxMessage.Bytes[1] = min;
+	TxMessage.Bytes[2] = max;
+	TxHeader.Identifier = 33;
+	CanSend(TxMessage.Bytes);
+}
+
+uint8_t calibration(uint8_t sensor){
+	millis = 0;
+	CAL_counter = 0;
+	for(int i = 0; i < 16; i++){
+		if(sensors[i].CAN_ID == sensor){
+			while(millis < 2000 && CAL_counter < 128){
+				if(millis % 15 == 0){
+					if(RxMessage.Bytes[1] != 1){
+						if(CAL_counter == 0){
+							sensors[i].cal_0 = sensors[i].averages;
+						}else{
+							sensors[i].cal_0 = (sensors[i].cal_0 + sensors[i].averages)/2;
+						}
+					}else{
+						if(CAL_counter == 0){
+							sensors[i].cal_1 = sensors[i].averages;
+						}else{
+							sensors[i].cal_1 = (sensors[i].cal_1 + sensors[i].averages)/2;
+						}
+					}
+				}
+			}
+
+			if(RxMessage.Bytes[1] != 1){
+				return sensors[i].cal_0;
+			}else{
+				return sensors[i].cal_1;
+			}
+		}
 	}
 }

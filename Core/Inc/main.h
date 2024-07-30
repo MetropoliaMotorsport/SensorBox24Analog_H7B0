@@ -82,6 +82,8 @@ extern uint16_t CAN_interval;
 extern uint16_t CAN_ID[16];
 extern uint16_t millis;
 extern uint8_t CAN_enable;
+extern uint8_t CAL_counter;
+extern uint8_t CAL_ON;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

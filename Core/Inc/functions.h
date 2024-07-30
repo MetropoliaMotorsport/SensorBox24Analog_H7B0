@@ -12,6 +12,10 @@ void CanSend(uint8_t *TxData);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void print(uint16_t select);
 void decode();
+uint8_t calibration(uint8_t sensor);
+void calibration_1(uint8_t sensor);
+void calibration_2(uint8_t sensor);
+void calibrate();
 
 typedef struct{
 	uint8_t DLC;

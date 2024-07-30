@@ -21,6 +21,10 @@ void Config_1(void) {
 		sensors[i].CAN_ID = 0;
 		sensors[i].CAN_interval = 20;
 		sensors[i].averages = 0;
+		sensors[i].cal_done = 0;
+		sensors[i].cal_0 = 0;
+		sensors[i].cal_1 = 0;
+		sensors[i].cal_2 = 0;
 		sensors[i].pin = i;
 	}
 
@@ -38,8 +42,6 @@ void Config_1(void) {
 	sensors[BTN1.pin] = BTN1;
 	sensors[BTN2.pin] = BTN2;
 	sensors[BTN3.pin] = BTN3;
-
-	
 
     CAN_interval = 20;
 }
