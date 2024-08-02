@@ -797,8 +797,11 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 			AVE_POS++;
 		}
 		else{
+
 			AVE_POS = 0;
 			for(int i = 0; i < hadc->Init.NbrOfConversion;i++){
+
+
 				for(int z = 0; z < ROLLING_AVE;z++){
 					if(z == 0){
 						//averages[i] = all_raw_data[i][0];
